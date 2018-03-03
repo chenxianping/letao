@@ -32,5 +32,42 @@ $(function(){
         $(".lt_aside").toggleClass("now");
         $(".lt_main").toggleClass("now");
     })
+
+    //4、点击icon_logOut弹出模态框
+    $(".icon_logOut").on("click",function(){
+        //console.log(1);
+        $("#logoutModal").modal("show");
+    })
+
+    //点击退出按钮 退出页面功能
+    $(".btn_logOut").on("click",function(){
+        //console.log(1);
+        $.ajax({
+            type:'get',
+            url:'/employee/employeeLogout',
+            dataType:'json',
+            success:function(info){
+                console.log(info);
+                if(info.success==true){
+                    location.href = "login.html";
+                }
+            }
+        })
+    });
+
+    //如果不是login.html，发送ajax请求，查询管理员是否登录
+    if(window.location.href.indexOf("login.html") == -1 ){
+        $.ajax({
+            type:'get',
+            url:'/employee/checkRootLogin',
+            dataType:'json',
+            success:function(info){
+                console.log(info);
+                if(info.error === 400){
+                    location.href = "login.html";
+                }
+            }
+        })
+    }
 })
 
