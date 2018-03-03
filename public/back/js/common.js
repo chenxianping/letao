@@ -19,5 +19,18 @@ $(function(){
             NProgress.done();
         },500)
     })
+
+
+    //2、二级菜单的显示与隐藏
+    //思路：找到二级分类的a标签
+    $(".second").prev().on("click",function(){
+        $(this).next().slideToggle();
+    });
+
+    //3、点击icon_menu，切换隐藏侧边栏
+    $(".icon_menu").on("click",function(){
+        $(".lt_aside").toggleClass("now");
+        $(".lt_main").toggleClass("now");
+    })
 })
 
